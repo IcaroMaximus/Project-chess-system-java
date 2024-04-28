@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -50,15 +52,21 @@ public class UI {
 	}
 	
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
-		printBoard(chessMatch.getPieces());
-		System.out.println();
-		printCapturedPieces(captured);
-		System.out.println();
-		System.out.println("Turn : " + chessMatch.getTurn());
-		System.out.println("Esperando player: " + chessMatch.getCurrentPlayer());
-		if (chessMatch.getCheck()) {
-			System.out.println("EN GARDE!");
+			printBoard(chessMatch.getPieces());
+			System.out.println();
+			printCapturedPieces(captured);
+			System.out.println();
+			System.out.println("Turn : " + chessMatch.getTurn());
+			if (!chessMatch.getCheckMate()) {
+			System.out.println("Esperando player: " + chessMatch.getCurrentPlayer());
+			if (chessMatch.getCheck()) {
+				System.out.println("EN GARDE!");
+			}
 		}
+			else {
+				System.out.println("CHECKMATE!");
+				System.out.println("Winner: " + chessMatch.getCurrentPlayer());
+			}
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) {
